@@ -2,8 +2,9 @@ import {
   Table,
 } from "react-bootstrap";
 import PostListItem from "./PostListItem";
+import { memo } from "react";
 
-const PostList = ({ data, loading, error }) => {
+const PostList = ({ data, deleteRecord }) => {
 
   
 
@@ -17,10 +18,10 @@ const PostList = ({ data, loading, error }) => {
         </tr>
       </thead>
       <tbody>
-       <PostListItem data={data} loading={loading} error={error} />
+       <PostListItem data={data} deleteRecord={deleteRecord} />
       </tbody>
     </Table>
   )
 }
 
-export default PostList
+export default memo(PostList)

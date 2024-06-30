@@ -5,7 +5,13 @@ import {
     ButtonGroup,
 } from "react-bootstrap";
 
-const PostListItem = ({ data}) => {
+const PostListItem = ({ data  , deleteRecord}) => {
+
+    const deleteHandler = (item) => {
+        if(window.confirm(`Do you really want to Delete ${item.title} ?`)){
+            deleteRecord(item.id)
+        }
+    }
 
     const records = data.map((el, index) =>
         <tr key={el.id}>
@@ -15,7 +21,7 @@ const PostListItem = ({ data}) => {
             <td>
                 <ButtonGroup aria-label="Basic example">
                     <Button variant="success">Edit</Button>
-                    <Button variant="danger">Delete</Button>
+                    <Button variant="danger" onClick={()=>{deleteHandler(el)}}>Delete</Button>
                 </ButtonGroup>
             </td>
         </tr>
