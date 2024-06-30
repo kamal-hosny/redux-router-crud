@@ -6,7 +6,7 @@ const Loading = ({loading, error, children}) => {
        {loading ? (
                     <p> "loading..."</p>
             ) :error ? (
-                    <p> "error form a server"</p>
+                    <p> "error form a server."</p>
             ) : children}
     </>
   )
