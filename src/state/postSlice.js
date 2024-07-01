@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { act } from "@testing-library/react";
+
 
 const initialState = {
     records: [] ,
@@ -36,6 +36,29 @@ export const deletePost = createAsyncThunk(
     }
 )
 
+export const insertPost = createAsyncThunk(
+    "posts/insertPost" ,
+    async (item, thunkAPI) => {
+        const { rejectWithValue, getState } = thunkAPI;
+        const { auth } = getState();
+        item.userId = auth.id;
+        try {
+            const res = await fetch("http://localhost:5005/posts", {
+                method: "POST",
+                body: JSON.stringify(item),
+                headers: {
+                    "Content-type" : "application/json; charset=UFT-8 "
+                },
+            })
+            const data = await res.json()
+            return data
+        }
+        catch (error){
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 
 
 
@@ -59,6 +82,18 @@ const postSlice = createSlice({
             state.error = action.payload
         },
         // create posts
+        [insertPost.pending]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [insertPost.fulfilled]: (state, action) => {
+            state.loading = false
+            state.records.push(action.payload)
+        },
+        [insertPost.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
         // delete posts
         [deletePost.pending]: (state) => {
             state.loading = true
