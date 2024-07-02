@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Button,
     ButtonGroup,
 } from "react-bootstrap";
 
 const PostListItem = ({ data, deleteRecord }) => {
+
+    const navigate = useNavigate()
 
     const deleteHandler = (item) => {
         if (window.confirm(`Do you really want to Delete ${item.title} ?`)) {
@@ -24,7 +26,7 @@ const PostListItem = ({ data, deleteRecord }) => {
             {/* <td>{el.description}</td> */}
             <td>
                 <ButtonGroup aria-label="Basic example">
-                    <Button variant="success">Edit</Button>
+                    <Button variant="success" onClick={() => navigate(`post/${el.id}/edit`)}>Edit</Button>
                     <Button variant="danger" onClick={() => { deleteHandler(el) }}>Delete</Button>
                 </ButtonGroup>
             </td>
