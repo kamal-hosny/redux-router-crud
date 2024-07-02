@@ -4,7 +4,7 @@ import {
 import PostListItem from "./PostListItem";
 import { memo } from "react";
 
-const PostList = ({ data, deleteRecord }) => {
+const PostList = ({ data, deleteRecord, isLoggedin }) => {
 
   
 
@@ -18,7 +18,7 @@ const PostList = ({ data, deleteRecord }) => {
         </tr>
       </thead>
       <tbody>
-       <PostListItem data={data} deleteRecord={deleteRecord} />
+       <PostListItem data={data} deleteRecord={deleteRecord} isLoggedin={isLoggedin} />
       </tbody>
     </Table>
   )

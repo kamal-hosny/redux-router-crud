@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import usePostDetails from "../hook/use-post-details";
 import { editPost, cleanRecord } from "../state/postSlice";
+import withGuard from "../util/withGuard";
 
 const EditPost = () => {
   const dispatch = useDispatch()
@@ -70,4 +71,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default withGuard(EditPost);

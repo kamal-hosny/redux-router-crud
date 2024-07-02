@@ -6,7 +6,9 @@ import Loading from '../components/Loading'
 
 const Index = () => {
   const dispatch = useDispatch()
-  const {records, loading, error} = useSelector((state) => state.posts)
+  const { records, loading, error } = useSelector((state) => state.posts)
+  const { isLoggedin } = useSelector((state) => state.auth)
+
   useEffect(()=>{
     dispatch(fetchPosts())
   },[dispatch])
@@ -18,7 +20,7 @@ const Index = () => {
   return (
     <>
     <Loading loading={loading} error={error}>
-    <PostList data={records} deleteRecord={deleteRecord} />
+    <PostList data={records} deleteRecord={deleteRecord} isLoggedin={isLoggedin} />
     </Loading>
     </>
   )
